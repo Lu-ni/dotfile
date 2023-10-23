@@ -1,0 +1,56 @@
+#include <CppUTest/TestHarness.h>
+#include <cstdlib>
+
+extern "C" {
+    #include "libft.h"   // Assuming libft.h has the prototype for ft_atoi
+}
+
+TEST_GROUP(FTAtoi) {};
+
+TEST(FTAtoi, ConvertPositiveNumber) {
+    const char* input = " 123";
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+TEST(FTAtoi, ConvertNegativeNumber) {
+    const char* input = "-123";
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+TEST(FTAtoi, ConvertPositiveNumberWithPlusSign) {
+    const char* input = "+123";
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+TEST(FTAtoi, ConvertStringWithLeadingWhitespace) {
+    const char* input = "   \t\n\r\v\f123";
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+TEST(FTAtoi, ConvertStringWithNonNumberCharacters) {
+    const char* input = "123abc456";
+    CHECK(ft_atoi(input) == atoi(input));  // Should return 123
+}
+
+TEST(FTAtoi, ConvertEmptyString) {
+    const char* input = "";
+    CHECK(ft_atoi(input) == atoi(input));  // Should return 0
+}
+
+TEST(FTAtoi, ConvertStringWithOnlyNonNumberCharacters) {
+    const char* input = "abc";
+    CHECK(ft_atoi(input) == atoi(input));  // Should return 0
+}
+
+TEST(FTAtoi, ConvertMaxInt) {
+    const char* input = "2147483647";  // INT_MAX for 32-bit systems
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+TEST(FTAtoi, ConvertMinInt) {
+    const char* input = "-2147483648";  // INT_MIN for 32-bit systems
+    CHECK(ft_atoi(input) == atoi(input));
+}
+
+// ... you can add more tests for additional edge cases or unique scenarios.
+

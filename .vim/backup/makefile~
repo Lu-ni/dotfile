@@ -1,0 +1,31 @@
+# Paths
+SRC_PATH = ../src/
+INCLUDE_PATH = ../include/
+INCLUDE_PATH_2 = ../src_part2/
+CPPUTEST_PATH = /opt/homebrew/Cellar/cpputest/4.0# Replace with the actual path to CppUTest on your system
+
+# Compilers
+CC = gcc
+CXX = g++
+
+# Flags
+CFLAGS = -I$(INCLUDE_PATH) -I$(CPPUTEST_PATH)/include -Wall -Wextra -Werror
+CXXFLAGS = $(CFLAGS)
+LDFLAGS = -L$(CPPUTEST_PATH)/lib -lCppUTest -lCppUTestExt
+
+# Source and Test Files
+SRCS = $(wildcard $(SRC_PATH)*.c) $(wildcard $(SRC_PATH_2)*.c)
+TEST_FILES = $(wildcard *.cpp)
+OBJ_FILES = $(SRCS:.c=.o) $(TEST_FILES:.cpp=.o)
+
+all: run_tests
+
+run_tests: $(OBJ_FILES)
+	$(CXX) $^ $(CXXFLAGS) $(LDFLAGS) -o $@
+	./run_tests -c
+
+clean:
+	rm -f $(OBJ_FILES) run_tests
+
+.PHONY: all clean
+
