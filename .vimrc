@@ -1,11 +1,26 @@
-  call plug#begin("/Users/bob/.vim/plugins")
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'preservim/nerdtree'
-    "Plug 'github/copilot.vim'
-  call plug#end()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+	" alternatively, pass a path where Vundle should install plugins
+	"call vundle#begin('~/some/path/here')
+
+	" let Vundle manage Vundle, required
+	Plugin 'VundleVim/Vundle.vim'
+    Plugin 'prabirshrestha/vim-lsp'
+    Plugin 'mattn/vim-lsp-settings'
+    Plugin 'prabirshrestha/asyncomplete.vim'
+    Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+    Plugin 'preservim/nerdtree'
+	Plugin 'google/vim-maktaba'
+	Plugin 'google/vim-codefmt'
+
+
+	" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
   
   syntax enable
   set number
@@ -60,3 +75,13 @@ endfunction
 
 command! ClangFormat call FormatWithClang()
 nnoremap <leader>cf :ClangFormat<CR>
+" us jk to Esc 
+inoremap jk <Esc>
+" Use , as leader key
+:let mapleader = ","
+" testing lsp shortcut
+nnoremap <leader>g :LspDefinition<CR>
+nnoremap <leader>G :LspDeclaration<CR>
+nnoremap <leader>p :LspPeekDefinition<CR>
+nnoremap <leader>P :LspPeekDeclaration<CR>
+
