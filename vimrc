@@ -124,3 +124,6 @@ fu! ToggleFold()
 endf
 " Map this function to Space key.
 noremap <space> :call ToggleFold()<CR>
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+end
