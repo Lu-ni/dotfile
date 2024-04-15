@@ -137,3 +137,4 @@ augroup BgHighlight
     autocmd WinLeave * set nonumber norelativenumber
 augroup END
 
+hi StatusLine ctermfg=NONE     ctermbg=67     cterm=NONE
