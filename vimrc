@@ -97,3 +97,30 @@ nnoremap <leader>G :LspDeclaration<CR>
 nnoremap <leader>p :LspPeekDefinition<CR>
 nnoremap <leader>P :LspPeekDeclaration<CR>
 let g:lsp_diagnostics_enabled = 0
+"http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
+" Folding stuff
+hi Folded guibg=red guifg=Red cterm=bold ctermbg=DarkGrey ctermfg=lightblue
+hi FoldColumn guibg=grey78 gui=Bold guifg=DarkBlue
+set foldcolumn=2
+set foldclose=
+set foldmethod=syntax
+set foldnestmax=10
+set foldlevel=999
+" Toggle fold state between closed and opened.
+
+" If there is no fold at current line, just moves forward.
+" If it is present, reverse it's state.
+fu! ToggleFold()
+  if foldlevel('.') == 0
+    normal! l
+  else
+    if foldclosed('.') < 0
+      . foldclose
+    else
+      . foldopen
+    endif
+  endif
+  echo
+endf
+" Map this function to Space key.
+noremap <space> :call ToggleFold()<CR>
