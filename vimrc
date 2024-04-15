@@ -102,8 +102,8 @@ let g:lsp_diagnostics_enabled = 0
 "http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
 " Folding stuff
 hi Folded guibg=red guifg=Red cterm=bold ctermbg=DarkGrey ctermfg=lightblue
-hi FoldColumn guibg=grey78 gui=Bold guifg=DarkBlue
-set foldcolumn=2
+"hi FoldColumn guibg=grey78 gui=Bold guifg=DarkBlue
+set foldcolumn=0
 set foldclose=
 set foldmethod=syntax
 set foldnestmax=10
@@ -133,6 +133,7 @@ end
 
 augroup BgHighlight
     autocmd!
-    autocmd WinEnter * set norelativenumber
+    autocmd WinEnter * set number relativenumber
+    autocmd WinLeave * set nonumber norelativenumber
 augroup END
 
