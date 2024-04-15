@@ -4,9 +4,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-	" alternatively, pass a path where Vundle should install plugins
-	"call vundle#begin('~/some/path/here')
-
 	" let Vundle manage Vundle, required
 	Plugin 'VundleVim/Vundle.vim'
     Plugin 'prabirshrestha/vim-lsp'
@@ -16,12 +13,27 @@ call vundle#begin()
     Plugin 'preservim/nerdtree'
 	Plugin 'google/vim-maktaba'
 	Plugin 'google/vim-codefmt'
-
-
+	Plugin 'google/vim-glaive'
+	Plugin 'ctrlpvim/ctrlp.vim'
 	" All of your Plugins must be added before the following line
 call vundle#end()            " required
+call glaive#Install()
+
 filetype plugin indent on    " required
-  
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+"  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+  autocmd FileType swift AutoFormatBuffer swift-format
+augroup END
+
   syntax enable
   set number
   set relativenumber
@@ -55,7 +67,7 @@ filetype plugin indent on    " required
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 
 
-  " autoformat with 42 format on save  
+  " autoformat with 42 format on save
 function! FormatWithClang()
   if &modified
     echo "Buffer has unsaved changes. Save before formatting."
@@ -75,7 +87,7 @@ endfunction
 
 command! ClangFormat call FormatWithClang()
 nnoremap <leader>cf :ClangFormat<CR>
-" us jk to Esc 
+" us jk to Esc
 inoremap jk <Esc>
 " Use , as leader key
 :let mapleader = ","
@@ -84,4 +96,4 @@ nnoremap <leader>g :LspDefinition<CR>
 nnoremap <leader>G :LspDeclaration<CR>
 nnoremap <leader>p :LspPeekDefinition<CR>
 nnoremap <leader>P :LspPeekDeclaration<CR>
-
+let g:lsp_diagnostics_enabled = 0
