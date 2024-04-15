@@ -96,7 +96,9 @@ nnoremap <leader>g :LspDefinition<CR>
 nnoremap <leader>G :LspDeclaration<CR>
 nnoremap <leader>p :LspPeekDefinition<CR>
 nnoremap <leader>P :LspPeekDeclaration<CR>
+"Remove diagnostic from lsp
 let g:lsp_diagnostics_enabled = 0
+
 "http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
 " Folding stuff
 hi Folded guibg=red guifg=Red cterm=bold ctermbg=DarkGrey ctermfg=lightblue
@@ -124,6 +126,13 @@ fu! ToggleFold()
 endf
 " Map this function to Space key.
 noremap <space> :call ToggleFold()<CR>
+
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 end
+
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set number
+    autocmd WinLeave * set nonumber
+augroup END
