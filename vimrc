@@ -35,8 +35,8 @@ augroup autoformat_settings
 augroup END
 
   syntax enable
- " set number
- " set relativenumber
+  set number
+  set relativenumber
   set backspace=indent,eol,start " Intuitive backspace behavior.
 
   set autoindent
